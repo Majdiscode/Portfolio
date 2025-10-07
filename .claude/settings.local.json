@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(powershell:*)",
+      "Bash(where:*)",
+      "Bash(winget install:*)",
+      "Bash(magick:*)",
+      "Bash(/c/Program Files/ImageMagick*/magick.exe)",
+      "Bash(\"Lithography/IMG_5381.HEIC\" \"Lithography/lithography_result.jpeg\")",
+      "Bash(\"MgAu/Fabrication/IMG_0859.HEIC\" \"MgAu/Fabrication/mgau_fabrication.jpeg\")",
+      "Bash(\"MgAu/MgAu SEM/Cool MgAu.tif\" \"MgAu/MgAu SEM/cool_mgau_sem.jpeg\")",
+      "Bash(cat:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
