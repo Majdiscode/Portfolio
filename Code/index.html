@@ -428,9 +428,11 @@
         
         .equipment-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             margin-top: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto 0;
         }
         
         .equipment-item {
@@ -685,10 +687,19 @@
                         <p style="color: #8b7355; margin-bottom: 1rem;">Project Gallery</p>
                         <div class="gallery-grid">
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/Fabrication/mgau_fabrication.jpeg" alt="Fabrication process">
+                                <img src="../MgAu/Fabrication/IMG_1121.jpeg" alt="Fabrication process 2">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../MgAu/MgAu SEM/cool_mgau_sem.jpeg" alt="Cool MgAu SEM">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="../MgAu/Fabrication/IMG_1124.jpeg" alt="Fabrication process 3">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="../MgAu/Fabrication/IMG_1125.jpeg" alt="Fabrication process 4">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="../MgAu/Fabrication/mgau_fabrication.jpeg" alt="Fabrication process">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../MgAu/MgAu SEM/GoodMgAu.jpeg" alt="SEM analysis">
@@ -704,15 +715,6 @@
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../MgAu/MgAu SEM/eee.jpeg" alt="SEM image 4">
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/Fabrication/IMG_1121.jpeg" alt="Fabrication process 2">
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/Fabrication/IMG_1124.jpeg" alt="Fabrication process 3">
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/Fabrication/IMG_1125.jpeg" alt="Fabrication process 4">
                             </div>
                         </div>
                     </div>
@@ -760,6 +762,12 @@
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Lithography/lithography_result.jpeg" alt="Lithography result">
                             </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="../Lithography/IMG_0194.jpeg" alt="Lithography process 1">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="../Lithography/IMG_0195.jpeg" alt="Lithography process 2">
+                            </div>
                         </div>
                         <p style="color: #4a4a4a; line-height: 1.7; margin-top: 1.5rem;">Complete process ownership from channel design through fabrication. Designed microfluidic channels in KLayout and fabricated using e-beam lithography on the Heidelberg MLA150. Process included PDMS transfer and flow testing validation.</p>
                     </div>
@@ -803,6 +811,10 @@
                     <strong>DEKTAK XT</strong>
                     Profilometer
                 </div>
+                <div class="equipment-item">
+                    <strong>Beneq ALD</strong>
+                    Atomic Layer Deposition System
+                </div>
             </div>
         </section>
 
@@ -817,6 +829,7 @@
                         <li>Microfluidic Device Fabrication</li>
                         <li>Wet Chemistry Processing</li>
                         <li>Cleanroom Protocols</li>
+                        <li>KLayout / LayoutEditor</li>
                     </ul>
                 </div>
                 
@@ -827,16 +840,6 @@
                         <li>AFM Surface Analysis</li>
                         <li>Profilometry</li>
                         <li>Feature Size Metrology</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Design & Simulation</h3>
-                    <ul>
-                        <li>KLayout / LayoutEditor</li>
-                        <li>ANSYS Fluent (CFD)</li>
-                        <li>MATLAB</li>
-                        <li>Python</li>
                     </ul>
                 </div>
             </div>
