@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majd Iskandarani - NanoEngineering Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fdfcfb;
+        }
+        
+        header {
+            background: linear-gradient(180deg, #fdfcfb 0%, #f9f7f5 100%);
+            padding: 5rem 2rem 4rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            color: #3d2f1f;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            color: #8b7355;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .contact {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .contact a {
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.4s ease;
+            font-weight: bold;
+        }
+        
+        .contact a:hover {
+            color: #5d4e37;
+        }
+        
+        nav {
+            background: rgba(253, 252, 251, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 0 rgba(139, 115, 85, 0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.4s ease;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #5d4e37;
+            transition: width 0.4s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        nav a:hover {
+            color: #5d4e37;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        section {
+            margin-bottom: 6rem;
+            opacity: 0;
+            animation: slideUp 0.8s ease forwards;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            color: #3d2f1f;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(93, 78, 55, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.08);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-card.expanded {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            order: -1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(93, 78, 55, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(93, 78, 55, 0.15);
+        }
+        
+        .project-card::after {
+            content: "Click to expand";
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
+            background: rgba(93, 78, 55, 0.1);
+            color: #8b7355;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .project-card:hover::after {
+            opacity: 1;
+        }
+        
+        .project-card.expanded::after {
+            display: none;
+        }
+        
+        .project-card.expanded:hover {
+            transform: none;
+        }
+        
+        .project-card h3 {
+            color: #3d2f1f;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .project-card p {
+            color: #4a4a4a;
+            line-height: 1.7;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            background: rgba(139, 115, 85, 0.1);
+            color: #8b7355;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin: 0.3rem 0.3rem 0.3rem 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 115, 85, 0.15);
+        }
+        
+        .project-tag:hover {
+            background: rgba(139, 115, 85, 0.18);
+            transform: scale(1.05);
+        }
+        
+        .project-gallery {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 0;
+        }
+        
+        .project-card.expanded .project-gallery {
+            max-height: 800px;
+            opacity: 1;
+            margin-top: 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 16px;
+            background: rgba(139, 115, 85, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 115, 85, 0.2);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 24px rgba(93, 78, 55, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1rem 0.8rem 1rem;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .expand-indicator {
+            font-size: 1.1rem;
+            color: #8b7355;
+            transition: transform 0.3s ease;
+            background: rgba(139, 115, 85, 0.1);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+        
+        .project-card.expanded .expand-indicator {
+            transform: rotate(180deg);
+        }
+        
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(93, 78, 55, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.08);
+        }
+        
+        .skill-category:hover {
+            box-shadow: 0 16px 48px rgba(93, 78, 55, 0.12);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .skill-category h3 {
+            color: #3d2f1f;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .skill-category ul {
+            list-style: none;
+        }
+        
+        .skill-category li {
+            padding: 0.8rem 0;
+            color: #4a4a4a;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+            transition: padding-left 0.3s ease;
+        }
+        
+        .skill-category li:hover {
+            padding-left: 0.5rem;
+        }
+        
+        .skill-category li:last-child {
+            border-bottom: none;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto 0;
+        }
+        
+        .equipment-item {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border-left: 3px solid #8b7355;
+            color: #4a4a4a;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.08);
+            border: 1px solid rgba(93, 78, 55, 0.1);
+            border-left: 3px solid #8b7355;
+        }
+        
+        .equipment-item:hover {
+            border-left-color: #5d4e37;
+            transform: translateX(8px);
+            box-shadow: 0 12px 40px rgba(93, 78, 55, 0.12);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .equipment-item strong {
+            color: #5d4e37;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        
+        .publication {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(93, 78, 55, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.08);
+            transition: all 0.4s ease;
+        }
+        
+        .publication:hover {
+            box-shadow: 0 16px 48px rgba(93, 78, 55, 0.12);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .publication-title {
+            color: #3d2f1f;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(93, 78, 55, 0.1);
+            border-radius: 32px;
+            margin-top: 4rem;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.08);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #5d4e37;
+            color: #ffffff;
+            padding: 1.1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0.5rem;
+            box-shadow: 0 8px 24px rgba(93, 78, 55, 0.2);
+        }
+        
+        .cta-button:hover {
+            background: #8b7355;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(93, 78, 55, 0.3);
+        }
+        
+        footer {
+            background: linear-gradient(180deg, #f9f7f5 0%, #fdfcfb 100%);
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #8b7355;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .contact {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin: 1.5rem auto 0;
+            }
+
+            .project-card {
+                padding: 2rem;
+            }
+
+            .project-card.expanded {
+                padding: 2rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.8rem;
+            }
+
+            .skills-section {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .equipment-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .project-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Majd Iskandarani</h1>
+        <p class="tagline">NanoEngineering | Nanofabrication & Characterization</p>
+        <div class="contact">
+            <a href="mailto:majdiskan11@gmail.com">majdiskan11@gmail.com</a>
+            <span style="color: #8b7355;">·</span>
+            <span style="color: #000000; font-weight: bold;">(650) 436-7268</span>
+            <span style="color: #8b7355;">·</span>
+            <span style="color: #000000; font-weight: bold;">La Jolla, CA</span>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#equipment">Equipment</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#publication">Publication</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="about">
+            <h2>About</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #4a4a4a;">
+                Undergraduate researcher at UCSD's Dr. Wang NanoBioElectronics Lab with hands-on experience in nanofabrication, 
+                thin-film deposition, and advanced characterization techniques. Authorized to independently operate major cleanroom equipment 
+                and passionate about building technology from the ground up.
+            </p>
+        </section>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card" onclick="toggleProject(this)">
+                    <h3>Algae Research<span class="expand-indicator">▼</span></h3>
+                    <p>Characterization using various SEM machines for medical/drug delivery applications.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="project-tag">Biotechnology</span>
+                        <span class="project-tag">Microscopy</span>
+                        <span class="project-tag">Characterization</span>
+                    </div>
+                    <div class="project-gallery">
+                        <p style="color: #8b7355; margin-bottom: 1rem;">Project Gallery</p>
+                        <div class="gallery-grid">
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Algae/Regular Algae/Great Algae.jpg" alt="Algae sample 1">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Algae/Regular Algae/Good Algae.jpg" alt="Algae sample 2">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Algae/Pico Algae/pico24.jpeg" alt="Algae sample 3">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Algae/Pico Algae/pico26.jpeg" alt="Algae sample 4">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Algae/Regular Algae/Modified Algae 2.jpg" alt="Algae sample 8">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="toggleProject(this)">
+                    <h3>Mg-Au Nanoparticle Synthesis<span class="expand-indicator">▼</span></h3>
+                    <p>Mg-Au nanomotor synthesis using thin-film sputtering for drug delivery applications.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="project-tag">Thin-Film Deposition</span>
+                        <span class="project-tag">Sputtering</span>
+                        <span class="project-tag">SEM</span>
+                        <span class="project-tag">Nanomotors</span>
+                    </div>
+                    <div class="project-gallery">
+                        <p style="color: #8b7355; margin-bottom: 1rem;">Project Gallery</p>
+                        <div class="gallery-grid">
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/Fabrication/IMG_1121.jpeg" alt="Fabrication process 2">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/MgAu SEM/cool_mgau_sem.jpeg" alt="Cool MgAu SEM">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/Fabrication/IMG_1124.jpeg" alt="Fabrication process 3">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/Fabrication/IMG_1125.jpeg" alt="Fabrication process 4">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/Fabrication/mgau_fabrication.jpeg" alt="Fabrication process">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/MgAu SEM/GoodMgAu.jpeg" alt="SEM analysis">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/MgAu SEM/aaa.jpeg" alt="SEM image 1">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/MgAu SEM/ccc.jpeg" alt="SEM image 2">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/MgAu SEM/ddd.jpeg" alt="SEM image 3">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="MgAu/MgAu SEM/eee.jpeg" alt="SEM image 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="toggleProject(this)">
+                    <h3>Conductive Microneedle Arrays<span class="expand-indicator">▼</span></h3>
+                    <p>SEM characterization of bare microneedle arrays for biosensing applications.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="project-tag">Sputtering</span>
+                        <span class="project-tag">Biosensors</span>
+                        <span class="project-tag">SEM</span>
+                    </div>
+                    <div class="project-gallery">
+                        <p style="color: #8b7355; margin-bottom: 1rem;">Project Gallery</p>
+                        <div class="gallery-grid">
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Microneedles/SEM/Microneedle.jpeg" alt="SEM microneedle 1">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Microneedles/SEM/microneedle2.jpeg" alt="SEM microneedle 2">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Microneedles/Fabrication/IMG_0927.jpeg" alt="Fabrication process 3">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Microneedles/Fabrication/IMG_0928.jpeg" alt="Fabrication process 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="toggleProject(this)">
+                    <h3>E-beam Lithography & Microfluidics<span class="expand-indicator">▼</span></h3>
+                    <p>Complete ownership from channel design to PDMS transfer and testing.</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="project-tag">E-beam Lithography</span>
+                        <span class="project-tag">KLayout</span>
+                        <span class="project-tag">PDMS</span>
+                        <span class="project-tag">Microfluidics</span>
+                    </div>
+                    <div class="project-gallery">
+                        <p style="color: #8b7355; margin-bottom: 1rem;">Project Gallery</p>
+                        <div class="gallery-grid">
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Lithography/lithography_result.jpeg" alt="Lithography result">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Lithography/IMG_0194.jpeg" alt="Lithography process 1">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="Lithography/IMG_0195.jpeg" alt="Lithography process 2">
+                            </div>
+                        </div>
+                        <p style="color: #4a4a4a; line-height: 1.7; margin-top: 1.5rem;">Complete process ownership from channel design through fabrication. Designed microfluidic channels in KLayout and fabricated using e-beam lithography on the Heidelberg MLA150 with SU-8 resist before transferring to PDMS substrate. Process included PDMS transfer and flow testing validation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipment">
+            <h2>Equipment Authorization</h2>
+            <p style="color: #4a4a4a;">Independently authorized to operate the following cleanroom and characterization tools:</p>
+            <div class="equipment-grid">
+                <div class="equipment-item">
+                    <strong>Heidelberg MLA150</strong>
+                    E-beam Lithography System
+                </div>
+                <div class="equipment-item">
+                    <strong>Denton Discovery 18</strong>
+                    Sputtering System
+                </div>
+                <div class="equipment-item">
+                    <strong>Denton 635</strong>
+                    Sputtering System
+                </div>
+                <div class="equipment-item">
+                    <strong>ZEISS Sigma 500</strong>
+                    Scanning Electron Microscope
+                </div>
+                <div class="equipment-item">
+                    <strong>FEI Apreo</strong>
+                    Scanning Electron Microscope
+                </div>
+                <div class="equipment-item">
+                    <strong>FEI Quanta 250</strong>
+                    Scanning Electron Microscope
+                </div>
+                <div class="equipment-item">
+                    <strong>Park NX20</strong>
+                    Atomic Force Microscope
+                </div>
+                <div class="equipment-item">
+                    <strong>DEKTAK XT</strong>
+                    Profilometer
+                </div>
+                <div class="equipment-item">
+                    <strong>Beneq ALD</strong>
+                    Atomic Layer Deposition System
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-section">
+                <div class="skill-category">
+                    <h3>Fabrication</h3>
+                    <ul>
+                        <li>E-beam Lithography</li>
+                        <li>Thin-Film Sputtering</li>
+                        <li>Microfluidic Device Fabrication</li>
+                        <li>Wet Chemistry Processing</li>
+                        <li>Cleanroom Protocols</li>
+                        <li>KLayout / LayoutEditor</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Characterization</h3>
+                    <ul>
+                        <li>SEM Imaging & Parameter Optimization</li>
+                        <li>AFM Surface Analysis</li>
+                        <li>Profilometry</li>
+                        <li>Feature Size Metrology</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="publication">
+            <h2>Publication</h2>
+            <div class="publication">
+                <div class="publication-title"><a href="https://pubs.rsc.org/en/content/articlelanding/2025/na/d5na00313j" target="_blank" style="color: #3d2f1f; text-decoration: none;">Sublingual Microrobotic Pills for Rapid and Efficient Drug Delivery</a></div>
+                <p style="color: #8b7355; margin-bottom: 0.5rem;">Nanoscale Advances, 2025</p>
+                <p style="color: #4a4a4a;">Iskandarani, M., et al.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">UCSD NanoBioElectronics Lab</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectCards = document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on a tag or gallery item
+                    if (e.target.classList.contains('project-tag') ||
+                        e.target.closest('.gallery-item')) {
+                        return;
+                    }
+
+                    const isCurrentlyExpanded = card.classList.contains('expanded');
+
+                    // Close all cards first
+                    projectCards.forEach(c => {
+                        c.classList.remove('expanded');
+                    });
+
+                    // If the clicked card wasn't expanded, expand it
+                    if (!isCurrentlyExpanded) {
+                        card.classList.add('expanded');
+
+                        // Smooth scroll to the expanded card
+                        setTimeout(() => {
+                            const cardRect = card.getBoundingClientRect();
+                            const offset = window.pageYOffset + cardRect.top - 100;
+                            window.scrollTo({
+                                top: offset,
+                                behavior: 'smooth'
+                            });
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        function toggleProject(card) {
+            // This function is called by onclick in HTML
+            // Actual logic is in the event listener above
+        }
+
+        function openLightbox(element, event) {
+            event.stopPropagation();
+            const img = element.querySelector('img');
+            const caption = element.querySelector('.gallery-caption');
+            
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
