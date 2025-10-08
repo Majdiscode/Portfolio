@@ -46,16 +46,21 @@ Since this is a static HTML file, you can:
    ```
 
 ### Working with Images
-The portfolio references images using relative paths like `images/algae/algae-1.jpg`. The actual project images are stored in:
+The portfolio references images using relative paths from the `Code/` directory like `../MgAu/MgAu SEM/GoodMgAu.jpeg`. The project images are stored in:
 - Algae research: `Algae/Pico Algae/` and `Algae/Regular Algae/`
 - MgAu nanoparticles: `MgAu/MgAu SEM/` and `MgAu/Fabrication/`
 - Microneedles: `Microneedles/SEM/` and `Microneedles/Fabrication/`
 - Lithography: `Lithography/`
 
-To properly display images, you would need to:
-1. Create an `images/` directory structure in the `Code/` folder
-2. Organize and rename project images to match the HTML references
-3. Or update the HTML image paths to point to the existing directory structure
+**Image Format Conversion**: The project uses ImageMagick for converting HEIC images to JPEG:
+```bash
+magick "source.HEIC" "destination.jpeg"
+```
+
+Common conversions already done:
+- `Lithography/IMG_5381.HEIC` → `lithography_result.jpeg`
+- `MgAu/Fabrication/IMG_0859.HEIC` → `mgau_fabrication.jpeg`
+- `MgAu/MgAu SEM/Cool MgAu.tif` → `cool_mgau_sem.jpeg`
 
 ### Code Style
 - Uses modern CSS with custom properties for theming

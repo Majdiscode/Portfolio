@@ -155,9 +155,11 @@
         
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
         }
         
         .project-card {
@@ -170,6 +172,7 @@
             cursor: pointer;
             box-shadow: 0 8px 32px rgba(93, 78, 55, 0.08);
             overflow: hidden;
+            position: relative;
         }
         
         .project-card.expanded {
@@ -179,10 +182,33 @@
         }
         
         .project-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: 0 16px 48px rgba(93, 78, 55, 0.15);
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(93, 78, 55, 0.15);
+        }
+        
+        .project-card::after {
+            content: "Click to expand";
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
+            background: rgba(93, 78, 55, 0.1);
+            color: #8b7355;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .project-card:hover::after {
+            opacity: 1;
+        }
+        
+        .project-card.expanded::after {
+            display: none;
         }
         
         .project-card.expanded:hover {
@@ -195,6 +221,9 @@
             font-size: 1.3rem;
             font-weight: 700;
             font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         
         .project-card p {
@@ -332,11 +361,17 @@
         }
         
         .expand-indicator {
-            display: inline-block;
-            margin-left: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: #8b7355;
             transition: transform 0.3s ease;
+            background: rgba(139, 115, 85, 0.1);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
         }
         
         .project-card.expanded .expand-indicator {
@@ -514,6 +549,7 @@
             .project-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+                margin: 1.5rem auto 0;
             }
 
             .project-card {
@@ -598,8 +634,7 @@
             <h2>About</h2>
             <p style="font-size: 1.1rem; line-height: 1.8; color: #4a4a4a;">
                 Undergraduate researcher at UCSD's Dr. Wang NanoBioElectronics Lab with hands-on experience in nanofabrication, 
-                thin-film deposition, and advanced characterization techniques. I specialize in e-beam lithography, SEM imaging, 
-                and process optimization for micro/nanoscale devices. Authorized to independently operate major cleanroom equipment 
+                thin-film deposition, and advanced characterization techniques. Authorized to independently operate major cleanroom equipment 
                 and passionate about building technology from the ground up.
             </p>
         </section>
@@ -609,7 +644,7 @@
             <div class="project-grid">
                 <div class="project-card" onclick="toggleProject(this)">
                     <h3>Algae Research<span class="expand-indicator">▼</span></h3>
-                    <p>Advanced research on algae-based systems for bio-applications. Characterization and optimization of algae growth parameters for sustainable biotechnology applications.</p>
+                    <p>Characterization using various SEM machines for medical/drug delivery applications.</p>
                     <div style="margin-top: 1rem;">
                         <span class="project-tag">Biotechnology</span>
                         <span class="project-tag">Microscopy</span>
@@ -620,35 +655,18 @@
                         <div class="gallery-grid">
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Algae/Regular Algae/Great Algae.jpg" alt="Algae sample 1">
-                                <div class="gallery-caption">Great algae sample</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Algae/Regular Algae/Good Algae.jpg" alt="Algae sample 2">
-                                <div class="gallery-caption">Good algae sample</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Algae/Pico Algae/pico24.jpeg" alt="Algae sample 3">
-                                <div class="gallery-caption">Pico algae sample 1</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Algae/Pico Algae/pico26.jpeg" alt="Algae sample 4">
-                                <div class="gallery-caption">Pico algae sample 2</div>
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../Algae/Regular Algae/DecentAlgae.jpg" alt="Algae sample 5">
-                                <div class="gallery-caption">Regular algae analysis</div>
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../Algae/Regular Algae/2flagela20.jpg" alt="Algae sample 6">
-                                <div class="gallery-caption">Two flagella structure</div>
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../Algae/Regular Algae/Modified Algae.jpg" alt="Algae sample 7">
-                                <div class="gallery-caption">Modified algae sample 1</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Algae/Regular Algae/Modified Algae 2.jpg" alt="Algae sample 8">
-                                <div class="gallery-caption">Modified algae sample 2</div>
                             </div>
                         </div>
                     </div>
@@ -656,8 +674,7 @@
 
                 <div class="project-card" onclick="toggleProject(this)">
                     <h3>Mg-Au Nanoparticle Synthesis<span class="expand-indicator">▼</span></h3>
-                    <p>Thin-film sputtering on glass substrates using Denton 18 for Mg-Au nanomotor synthesis. 
-                    Optimized deposition parameters for drug delivery applications and characterized using SEM.</p>
+                    <p>Mg-Au nanomotor synthesis using thin-film sputtering for drug delivery applications.</p>
                     <div style="margin-top: 1rem;">
                         <span class="project-tag">Thin-Film Deposition</span>
                         <span class="project-tag">Sputtering</span>
@@ -669,39 +686,33 @@
                         <div class="gallery-grid">
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../MgAu/Fabrication/mgau_fabrication.jpeg" alt="Fabrication process">
-                                <div class="gallery-caption">Fabrication process</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/GoodMgAu.jpeg" alt="SEM analysis B">
-                                <div class="gallery-caption">SEM analysis B</div>
+                                <img src="../MgAu/MgAu SEM/cool_mgau_sem.jpeg" alt="Cool MgAu SEM">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/GoodMgAu.jpeg" alt="SEM image 2">
-                                <div class="gallery-caption">GoodMgAu SEM</div>
+                                <img src="../MgAu/MgAu SEM/GoodMgAu.jpeg" alt="SEM analysis">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/aaa.jpeg" alt="SEM image 3">
-                                <div class="gallery-caption">SEM analysis 1</div>
+                                <img src="../MgAu/MgAu SEM/aaa.jpeg" alt="SEM image 1">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/bbb.jpeg" alt="SEM image 4">
-                                <div class="gallery-caption">SEM analysis 2</div>
+                                <img src="../MgAu/MgAu SEM/ccc.jpeg" alt="SEM image 2">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/ccc.jpeg" alt="SEM image 5">
-                                <div class="gallery-caption">SEM analysis 3</div>
+                                <img src="../MgAu/MgAu SEM/ddd.jpeg" alt="SEM image 3">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/ddd.jpeg" alt="SEM image 6">
-                                <div class="gallery-caption">SEM analysis 4</div>
+                                <img src="../MgAu/MgAu SEM/eee.jpeg" alt="SEM image 4">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/eee.jpeg" alt="SEM image 7">
-                                <div class="gallery-caption">SEM analysis 5</div>
+                                <img src="../MgAu/Fabrication/IMG_1121.jpeg" alt="Fabrication process 2">
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../MgAu/MgAu SEM/cool_mgau_sem.jpeg" alt="SEM image 8">
-                                <div class="gallery-caption">Cool MgAu SEM</div>
+                                <img src="../MgAu/Fabrication/IMG_1124.jpeg" alt="Fabrication process 3">
+                            </div>
+                            <div class="gallery-item" onclick="openLightbox(this, event)">
+                                <img src="../MgAu/Fabrication/IMG_1125.jpeg" alt="Fabrication process 4">
                             </div>
                         </div>
                     </div>
@@ -709,8 +720,7 @@
 
                 <div class="project-card" onclick="toggleProject(this)">
                     <h3>Conductive Microneedle Arrays<span class="expand-indicator">▼</span></h3>
-                    <p>Performed conformal Cr/Pt sputtering on microneedle arrays to enhance conductivity for biosensing applications. 
-                    SEM characterization to verify coating uniformity and thickness.</p>
+                    <p>SEM characterization of bare microneedle arrays for biosensing applications.</p>
                     <div style="margin-top: 1rem;">
                         <span class="project-tag">Sputtering</span>
                         <span class="project-tag">Biosensors</span>
@@ -721,27 +731,15 @@
                         <div class="gallery-grid">
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Microneedles/SEM/Microneedle.jpeg" alt="SEM microneedle 1">
-                                <div class="gallery-caption">SEM microneedle 1</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Microneedles/SEM/microneedle2.jpeg" alt="SEM microneedle 2">
-                                <div class="gallery-caption">SEM microneedle 2</div>
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../Microneedles/Fabrication/IMG_0780.jpeg" alt="Fabrication process 1">
-                                <div class="gallery-caption">Fabrication process 1</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Microneedles/Fabrication/IMG_0927.jpeg" alt="Fabrication process 3">
-                                <div class="gallery-caption">Fabrication process 3</div>
-                            </div>
-                            <div class="gallery-item" onclick="openLightbox(this, event)">
-                                <img src="../Microneedles/Fabrication/IMG_0863.jpeg" alt="Fabrication process 2">
-                                <div class="gallery-caption">Fabrication process 2</div>
                             </div>
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Microneedles/Fabrication/IMG_0928.jpeg" alt="Fabrication process 4">
-                                <div class="gallery-caption">Fabrication process 4</div>
                             </div>
                         </div>
                     </div>
@@ -749,8 +747,7 @@
 
                 <div class="project-card" onclick="toggleProject(this)">
                     <h3>E-beam Lithography & Microfluidics<span class="expand-indicator">▼</span></h3>
-                    <p>Designed microfluidic channels in KLayout and fabricated them using e-beam lithography on the Heidelberg MLA150. 
-                    Complete process ownership from mask design through PDMS transfer and testing.</p>
+                    <p>Complete ownership from channel design to PDMS transfer and testing.</p>
                     <div style="margin-top: 1rem;">
                         <span class="project-tag">E-beam Lithography</span>
                         <span class="project-tag">KLayout</span>
@@ -762,10 +759,9 @@
                         <div class="gallery-grid">
                             <div class="gallery-item" onclick="openLightbox(this, event)">
                                 <img src="../Lithography/lithography_result.jpeg" alt="Lithography result">
-                                <div class="gallery-caption">E-beam lithography result</div>
                             </div>
                         </div>
-                        <p style="color: #4a4a4a; line-height: 1.7; margin-top: 1.5rem;">Complete process ownership from mask design through fabrication. Designed microfluidic channels in KLayout software and successfully fabricated them using e-beam lithography on the Heidelberg MLA150. Process included PDMS transfer and flow testing validation.</p>
+                        <p style="color: #4a4a4a; line-height: 1.7; margin-top: 1.5rem;">Complete process ownership from channel design through fabrication. Designed microfluidic channels in KLayout and fabricated using e-beam lithography on the Heidelberg MLA150. Process included PDMS transfer and flow testing validation.</p>
                     </div>
                 </div>
             </div>
